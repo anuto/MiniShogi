@@ -1,6 +1,6 @@
 class Piece:
 	def __repr__(self):
-		return (self.name)
+		return (self.name[0] + str(self.team))
 
 	def check(self, x, y, board):
 		if x >= 0 and x < 5 and y >= 0 and y < 5:

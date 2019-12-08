@@ -51,21 +51,7 @@ class Board:
 				else:
 					name = col.name
 					row_s += "["
-					if name == 'Emperor':
-						row_s += "E"
-					elif name == "GoldGen":
-						row_s += "G"
-					elif name == "SilverGen":
-						row_s += "S"
-					elif name == "Bishop":
-						row_s += "B"
-					elif name == "Rook":
-						row_s += "R"
-					elif name == "Pawn":
-						row_s += "P"
-					else:
-						raise Exception("weird piece: " + name)
-					row_s += str(col.team)
+					row_s += str(col)
 					row_s += "]"
 			print (row_s)
 
@@ -81,8 +67,6 @@ class Board:
 			print(s)
 
 	def move(self, x1, y1, x2, y2):
-		import pdb
-		pdb.set_trace()
 		curr = self.board[y1][x1]
 		moves = self.get_valid_moves(x1, y1)
 
@@ -96,6 +80,8 @@ class Board:
 					self.dead_pieces[1].append(other)
 			self.board[y2][x2] = curr
 
+	def get_piece_name(self, x, y):
+		return str(self.board[y][x])
 
 	def valid_moves(self, team):
 		moves = {}
@@ -104,7 +90,7 @@ class Board:
 			num_col = 0
 			for col in row:
 				if not col == None and col.team == team:
-					moves[((num_row, num_col), col)] = self.get_valid_moves(num_row, num_col)
+					moves[((num_col,  num_row), col)] = self.get_valid_moves(num_row, num_col)
 				num_col += 1
 			num_col = 0
 			num_row += 1
@@ -126,7 +112,7 @@ class Board:
 			col_num = 0
 			for col in row:
 				if col == None:
-					coords += [(row_num, col_num)]
+					coords += [(col_num, row_num)]
 				col_num += 1
 			row_num += 1
 		return coords

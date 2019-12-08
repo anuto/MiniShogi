@@ -32,7 +32,7 @@ def main():
 			for index, holding in enum_options:
 				print("[" + str(index + 1) + "]: " + str(holding))
 				move_dict[index] = holding
-			answer = int(raw_input("Where should it move to?"))
+			answer = int(raw_input("Where should it move to? "))
 		
 		chosen = answer - 1
 		move = move_dict[chosen]
