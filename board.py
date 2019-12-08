@@ -7,6 +7,8 @@ from Pawn import Pawn
 
 import copy
 
+DEVELOPING = False
+
 class Board:
 
 	def __init__(self):
@@ -17,10 +19,11 @@ class Board:
 			[None] * 5,
 			[None] * 5
 		]
-		# print self.board
+
 		self.dead_pieces = {}
 		self.dead_pieces[1] = []
 		self.dead_pieces[2] = []
+		self.winner = None
 
 	def initialize(self):
 		pieces = {}
@@ -39,7 +42,11 @@ class Board:
 		self.board[4][0] = Emperor(2)
 		self.board[3][0] = Pawn(2)
 
-		self.print_board()
+		# self.print_board()
+		self.dead_pieces = {}
+		self.dead_pieces[1] = []
+		self.dead_pieces[2] = []
+		self.winner = None
 
 	def print_board(self):
 		print("off board: " + str(self.dead_pieces[1]))
@@ -55,9 +62,9 @@ class Board:
 					row_s += "]"
 			print (row_s)
 
-		print("off board: " + str(self.dead_pieces[2]))
-		print()
-		self.print_board_names()
+		print("off board: " + str(self.dead_pieces[2]) + "\n")
+		if DEVELOPING:
+			self.print_board_names()
 
 	def print_board_names(self):
 		for i in range(5):
@@ -67,21 +74,43 @@ class Board:
 			print(s)
 
 	def move(self, x1, y1, x2, y2):
+
 		curr = self.board[y1][x1]
-		moves = self.get_valid_moves(x1, y1)
+		moves = self.get_valid_moves(y1, x1)
 
 		if (x2, y2) in moves:
 			self.board[y1][x1] = None
 			other = self.board[y2][x2] 
+			self.check_winner(curr, other)
+
 			if not other == None:
+				other.team = curr.team
 				if curr.team == 1:
-					self.dead_pieces[2].append(other)
-				else:
 					self.dead_pieces[1].append(other)
+				else:
+					self.dead_pieces[2].append(other)
 			self.board[y2][x2] = curr
+
+
+	def place(self, piece, x, y):
+		empty = self.get_empty_spaces()
+		if (x, y) in empty:
+			self.board[y][x] = piece[1]
+			team = piece[1].team
+
+			self.dead_pieces[team].remove(piece[1])
+		else:
+			raise Exception("not a valid place to place piece: " + str(piece[1]))
 
 	def get_piece_name(self, x, y):
 		return str(self.board[y][x])
+
+	def check_winner(self, curr, other):
+		other_name = str(other)
+		other_piece_name = other_name[0]
+
+		if other_piece_name == 'E':
+			self.winner = curr.team
 
 	def valid_moves(self, team):
 		moves = {}
@@ -105,7 +134,7 @@ class Board:
 		moves = self.board[num_row][num_col].get_moves(num_col, num_row, self.board)
 		return moves
 
-	def get_empty_spaces():
+	def get_empty_spaces(self):
 		coords = []
 		row_num = 0
 		for row in self.board:
@@ -116,4 +145,17 @@ class Board:
 				col_num += 1
 			row_num += 1
 		return coords
+
+	def game_over(self):
+		return not self.winner == None
+
+	def get_winner(self):
+		if self.winner == None:
+			raise Exception("game is not over")
+		else:
+			return self.winner
+
+	def reset_board(self):
+		self.initialize()
+
 
