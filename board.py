@@ -26,8 +26,13 @@ class Board:
 		self.winner = None
 
 	def initialize(self):
-		pieces = {}
-
+		self.board = [
+			[None] * 5,
+			[None] * 5,
+			[None] * 5,
+			[None] * 5,
+			[None] * 5
+		]
 		self.board[0][0] = Rook(1)
 		self.board[0][1] = Bishop(1)
 		self.board[0][2] = SilverGen(1)
