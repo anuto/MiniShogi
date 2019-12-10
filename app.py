@@ -8,7 +8,8 @@ app.config['TEMPLATES_AUTO_RELOAD'] = True
 def index():
 	b = Board.Board()
 	b.initialize()
-	board_state = b.board_state()
+	# board_state = b.board_state()
+	board_state = b.board_state_for_html()
 	return render_template('index.html', board=board_state)
 
 if __name__ == "__main__":

@@ -19,49 +19,16 @@
       <div class="row">
         {% for row in board %}
           <div class = "row">
-            {% for piece in row %}
-              <div class="square">
+            {% for (piece, i) in row %}
+              <div class="square" id={{i}}>
                 {% if piece %}
-                  <div class="center">
-                    {{piece}}
-                  </div>
+                  {{piece}}
                 {% endif %}
               </div>
             {% endfor %}
           </div>
     {% endfor %}
-<!-- 
-      <div class="row">
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-      </div>
-
-      <div class="row">
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-      </div>
-
-      <div class="row">
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-      </div>
-
-      <div class="row">
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-      </div> -->
+    <script type="text/javascript" src="{{url_for('static', filename='scripts/listener.js')  }}"></script>
 
     </div>
   </body>

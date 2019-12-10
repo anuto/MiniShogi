@@ -126,6 +126,18 @@ class Board:
 	def board_state(self):
 		return self.board
 
+	def board_state_for_html(self):
+		i = 0
+		mod_board = []
+		for row in self.board:
+			mod_row = []
+			for square in row:
+				mod_row += [(square, i)]
+				i += 1
+			mod_board.append(mod_row)
+		print mod_board
+		return mod_board
+
 	def valid_moves(self, team):
 		moves = {}
 		num_row = 0
