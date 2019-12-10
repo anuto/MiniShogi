@@ -12,5 +12,10 @@ def index():
 	board_state = b.board_state_for_html()
 	return render_template('index.html', board=board_state)
 
+@app.route('/get_valid_moves/<pos>')
+def valid_moves(pos):
+	valid_squares = b.valid_moves_from_html(pos)
+	return render_template("index.html", board=board_state, valid_squares=valid_squares)
+
 if __name__ == "__main__":
  	app.run()

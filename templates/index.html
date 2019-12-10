@@ -20,7 +20,11 @@
         {% for row in board %}
           <div class = "row">
             {% for (piece, i) in row %}
-              <div class="square" id={{i}}>
+              {% if i in valid_squares %}
+                <div class="square can_move_to" id={{i}}>
+              {% else %}
+                <div class="square" id={{i}}>
+              {% endif %}
                 {% if piece %}
                   {{piece}}
                 {% endif %}
