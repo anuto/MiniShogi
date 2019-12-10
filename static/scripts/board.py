@@ -123,6 +123,9 @@ class Board:
 		if other_piece_name == 'E':
 			self.winner = curr.team
 
+	def board_state(self):
+		return self.board
+
 	def valid_moves(self, team):
 		moves = {}
 		num_row = 0
