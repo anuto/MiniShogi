@@ -85,19 +85,25 @@ class Board:
 
 		if (x2, y2) in moves:
 			self.board[y1][x1] = None
-			other = self.board[y2][x2] 
+			other = self.board[y2][x2]
 			self.check_winner(curr, other)
 
 			if not other == None:
-				other.team = curr.team
-				if curr.team == 1:
-					self.dead_pieces[1].append(other)
-				else:
-					self.dead_pieces[2].append(other)
+				self.dead_pieces[curr.team].append(other)
+				other.died()
 			self.board[y2][x2] = curr
+
+		if self.check_promotion(curr, y2):
+			ops = curr.promotion_ops()
+			return ops
+
+	def check_promotion(self, curr, y):
+		team = curr.team
+		return (team == 1 and y == 4) or (team == 2 and y == 0)
 
 
 	def place(self, piece, x, y):
+
 		empty = self.get_empty_spaces()
 		if (x, y) in empty:
 			self.board[y][x] = piece[1]
@@ -163,4 +169,5 @@ class Board:
 	def reset_board(self):
 		self.initialize()
 
-
+	def promote(self, piece, position):
+		piece.promote(position)

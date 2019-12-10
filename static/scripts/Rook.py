@@ -3,7 +3,8 @@ from Piece import Piece
 class Rook(Piece):
 	def __init__(self, team):
 		self.name = 'Rook'
-		self.team = team
+		self.team = team		
+		Piece.__init__(self, team, ["King Dragon"])
 
 	def get_moves(self, x, y, board):
 		moves = []

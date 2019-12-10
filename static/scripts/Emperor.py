@@ -4,6 +4,7 @@ class Emperor(Piece):
 	def __init__(self, team):
 		self.name = 'Emperor'
 		self.team = team
+		Piece.__init__(self, team)
 
 	def get_moves(self, x, y, board):
 		return []

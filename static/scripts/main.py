@@ -52,7 +52,19 @@ def play_game(b):
 		if dead:
 			b.place(piece, move[0], move[1])
 		else:
-			b.move(piece[0][0], piece[0][1], move[0], move[1])
+			promotions = b.move(piece[0][0], piece[0][1], move[0], move[1])
+			if promotions:
+				enum_promotions = enumerate(promotions)
+				answer = 0
+				while answer < 1 or answer > len(promotions):
+					print("available promotions: ")
+					for index, holding in enum_promotions:
+						s = "[" + str(index + 1) + "]: " 
+						s += promotions[index]
+						print(s)
+					answer = int(raw_input("promote " + str(piece) + " to what role? "))
+
+				b.promote(piece[1], promotions[answer - 1])
 		if player == 1:
 			player = 2
 		else:

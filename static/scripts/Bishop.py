@@ -4,6 +4,7 @@ class Bishop(Piece):
 	def __init__(self, team):
 		self.name = 'Bishop'
 		self.team = team
+		Piece.__init__(self, team, ["Horse Dragon"])
 	
 	def get_moves(self, x, y, board):
 		moves = []

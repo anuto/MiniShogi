@@ -1,0 +1,38 @@
+.square {
+	height: 70px;
+	width: 70px;
+	border-color: black;
+	border-width: 3px;
+	background: white;
+	float: left;
+	border-radius: 5px;
+	margin-right: 15px;
+}
+
+body {
+	background-color: white;
+}
+
+.board {
+	background-color: lightgrey;
+	border-radius: 15px;
+	height: 415px;
+	width: 435px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 20px;
+	padding-right: 0px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.row {
+	height: 70px;
+	margin-bottom: 15px;
+}
+
+.center {
+	padding-top: 25px;
+	text-align: center;
+}
