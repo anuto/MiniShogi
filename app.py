@@ -23,11 +23,8 @@ def valid_moves(pos):
 		valid_squares = b.valid_moves_from_html(pos)
 		global selected
 		# TODO: not strictly speaking true. could be an immobilized piece.
-		if valid_squares:
-			selected = pos
-		else:
-			selected = None
-		return redirect("/")
+		# but also nonideal - highlighting invalid squares
+		selected = pos
 	else:
 		b.move_from_html(selected, pos)
 		global valid_squares
@@ -36,8 +33,8 @@ def valid_moves(pos):
 		board_state = b.board_state_for_html()
 		global selected
 		selected = None
-		return redirect("/")
-
+	
+	return redirect("/")
 
 if __name__ == "__main__":
  	app.run()
