@@ -97,6 +97,14 @@ class Board:
 			ops = curr.promotion_ops()
 			return ops
 
+	def move_from_html(self, pos1, pos2):
+		y1 = pos1 / 5
+		x1 = pos1 % 5
+		y2 = pos2 / 5
+		x2 = pos2 % 5
+
+		self.move(x1, y1, x2, y2)
+
 	def check_promotion(self, curr, y):
 		team = curr.team
 		return (team == 1 and y == 4) or (team == 2 and y == 0)
