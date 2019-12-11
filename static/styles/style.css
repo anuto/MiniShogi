@@ -1,6 +1,6 @@
 .tile {
 	height: 90px;
-	width: 75px;
+	width: 80px;
 	border-color: black;
 	border-width: 3px;
 	background: repeating-linear-gradient(
@@ -17,6 +17,7 @@
 	text-align: center;
 	padding-left: 15px;
 	padding-top: 15px;
+	padding-right: 10px;
 }
 
 /* the legit one */
@@ -28,9 +29,10 @@
 	float: left;
 	padding-top: 30px;
 	border-radius: 5px;
-	background: #E1DDDA;
+	background: #784E06;
   	box-shadow: 0 7px 8px -10px black;
 	text-align: center;
+	color: #E5C062;
 }
 
 /* the experimental ones */
@@ -47,17 +49,23 @@
 
 
 .square:hover {
-	background: #e3e1e1;
+	background: #b5750a;
 }
 
-.square.can_move_to {
-	background: yellow;
+.tile.can_move_to {
+	height: 85px;
+	width: 75px;
+	padding-top:10px;
+	padding-left: 10px;
+	border: solid #F8F8F8;
+	border-width: 5px;
 }
 
 .square.selected {
-	background: orange;
-}
 
+	background: #b5750a;
+
+}
 
 body {
 	background-color: white;
@@ -67,7 +75,7 @@ body {
 	background-color: #c8830a;
 	border-radius: 15px;
 	height: 625px;
-	width: 535px;
+	width: 550px;
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
