@@ -8,29 +8,73 @@ class Rook(Piece):
 
 	def get_moves(self, x, y, board):
 		moves = []
-		for col in range(5):
-			occupied = self.check(x - col, y, board)
-			if self.check(x - col, y, board):
-				moves += [(x - col, y)]
-				if not self.is_blocked(board, x - col, y):
-					break
 
-		for col in range(5):
-			if self.check(x + col, y, board):
-				moves += [(x + col, y)]
-				if not self.is_blocked(board, x + col, y):
-					break
-		for row in range(5):
-			if self.check(x, y + row, board):
-				moves += [(x, y + row)]
-				if not self.is_blocked(board, x, y + row):
-					break
+		seen_enemy = False
+		for i in range(1, 6):
+			x_coord = x
+			y_coord = y + i
 
-		for row in range(5):
-			if self.check(x, y - row, board):
-				moves += [(x, y - row)]
-				if not self.is_blocked(board, x, y - row):
+			if self.is_valid_square(x_coord, y_coord):
+				is_blocked = self.get_info(x_coord, y_coord, board, moves)
+				# hacky way of indicating we've seen something on our team
+				if is_blocked == None or (is_blocked and seen_enemy):
 					break
-			
+				else:
+					moves += [(x_coord, y_coord)]
+					if is_blocked:
+						seen_enemy = True
+
+		seen_enemy = False
+		for i in range(1, 6):
+			x_coord = x
+			y_coord = y - i
+
+			if self.is_valid_square(x_coord, y_coord):
+				is_blocked = self.get_info(x_coord, y_coord, board, moves)
+				# hacky way of indicating we've seen something on our team
+				if is_blocked == None or (is_blocked and seen_enemy):
+					break
+				else:
+					moves += [(x_coord, y_coord)]
+					if is_blocked:
+						seen_enemy = True
+
+		seen_enemy = False
+		for i in range(1, 6):
+			x_coord = x + i
+			y_coord = y
+
+			if self.is_valid_square(x_coord, y_coord):
+				is_blocked = self.get_info(x_coord, y_coord, board, moves)
+				# hacky way of indicating we've seen something on our team
+				if is_blocked == None or (is_blocked and seen_enemy):
+					break
+				else:
+					moves += [(x_coord, y_coord)]
+					if is_blocked:
+						seen_enemy = True
+
+		seen_enemy = False
+		for i in range(1, 6):
+			x_coord = x - i
+			y_coord = y
+
+			if self.is_valid_square(x_coord, y_coord):
+				is_blocked = self.get_info(x_coord, y_coord, board, moves)
+				# hacky way of indicating we've seen something on our team
+				if is_blocked == None or (is_blocked and seen_enemy):
+					break
+				else:
+					moves += [(x_coord, y_coord)]
+					if is_blocked:
+						seen_enemy = True
 		return moves
 
+	def get_info(self, x, y, board, moves):
+		empty = self.is_empty(x, y, board)
+		if empty:
+			return False
+		elif self.on_same_team(x, y, board):
+			return None
+		else:
+			return True

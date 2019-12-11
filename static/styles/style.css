@@ -1,12 +1,72 @@
+.tile {
+	height: 90px;
+	width: 80px;
+	border-color: black;
+	border-width: 3px;
+	background: repeating-linear-gradient(
+	  to right,
+	  #f6ba52,
+	  #f6ba52 10px,
+	  #ffd180 10px,
+	  #ffd180 20px
+	);	float: left;
+	border-radius: 10px;
+	margin-right: 5px;
+	padding: 10px;
+	margin-bottom: 10px;
+	text-align: center;
+	padding-left: 15px;
+	padding-top: 15px;
+	padding-right: 10px;
+}
+
+/* the legit one */
 .square {
-	height: 70px;
+	height: 50px;
 	width: 70px;
 	border-color: black;
 	border-width: 3px;
-	background: white;
 	float: left;
+	padding-top: 30px;
 	border-radius: 5px;
-	margin-right: 15px;
+	background: #784E06;
+  	box-shadow: 0 7px 8px -10px black;
+	text-align: center;
+
+	color: #E5C062;
+	text-shadow: 0px 1px 0px #f2dfb0;
+}
+
+/* the experimental ones */
+/*
+
+.square {
+	position: relative;
+	width: 54px;
+	box-sizing: content-box;
+	border-width: 50px 18px 0;
+	border-style: solid;
+	border-color: #E1DDDA transparent;
+}*/
+
+
+.square:hover {
+	background: #b5750a;
+}
+
+.tile.can_move_to {
+	height: 85px;
+	width: 75px;
+	padding-top:10px;
+	padding-left: 10px;
+	border: solid #F8F8F8;
+	border-width: 5px;
+}
+
+.square.selected {
+
+	background: #b5750a;
+
 }
 
 body {
@@ -14,17 +74,17 @@ body {
 }
 
 .board {
-	background-color: lightgrey;
+	background-color: #c8830a;
 	border-radius: 15px;
-	height: 415px;
-	width: 435px;
+	height: 625px;
+	width: 550px;
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
-	padding-left: 20px;
-	padding-right: 0px;
-	padding-top: 20px;
-	padding-bottom: 20px;
+	padding-left: 25px;
+	padding-right: 15px;
+	padding-top: 25px;
+	padding-bottom: 15px;
 }
 
 .row {

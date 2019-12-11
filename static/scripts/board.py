@@ -97,6 +97,14 @@ class Board:
 			ops = curr.promotion_ops()
 			return ops
 
+	def move_from_html(self, pos1, pos2):
+		y1 = pos1 / 5
+		x1 = pos1 % 5
+		y2 = pos2 / 5
+		x2 = pos2 % 5
+
+		self.move(x1, y1, x2, y2)
+
 	def check_promotion(self, curr, y):
 		team = curr.team
 		return (team == 1 and y == 4) or (team == 2 and y == 0)
@@ -122,6 +130,32 @@ class Board:
 
 		if other_piece_name == 'E':
 			self.winner = curr.team
+
+	def board_state(self):
+		return self.board
+
+	def board_state_for_html(self):
+		i = 0
+		mod_board = []
+		for row in self.board:
+			mod_row = []
+			for square in row:
+				mod_row += [(square, i)]
+				i += 1
+			mod_board.append(mod_row)
+		print mod_board
+		return mod_board
+
+	def valid_moves_from_html(self, pos):
+		num_row = pos / 5
+		num_col = pos % 5
+		print "row: " + str(num_row) 
+		print "col: " + str(num_col)
+		valid_moves = self.get_valid_moves(num_row, num_col)
+		valid_squares = []
+		for (x, y) in valid_moves:
+			valid_squares.append(y * 5 + x)
+		return valid_squares
 
 	def valid_moves(self, team):
 		moves = {}

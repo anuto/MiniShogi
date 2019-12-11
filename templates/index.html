@@ -16,45 +16,37 @@
   <body>
     Hello
     <div class="board">
-      <div class="row">
-        <div class="square"><div class="center">hi</div></div>
-        <div class="square">hi</div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-      </div>
-
-      <div class="row">
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-      </div>
-
-      <div class="row">
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-      </div>
-
-      <div class="row">
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-      </div>
-
-      <div class="row">
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-      </div>
+        <div class="row">
+            {% for row in board %}
+                <div class = "row">
+                {% for (piece, i) in row %}
+                    {% if piece %}
+                        <div class="tile">
+                        {% if valid_squares and i in valid_squares %}
+                            <div class = "square can_move_to" id = {{i}}>{{piece}}></div>
+                        {% else %}
+                            {% if selected and i == selected %}
+                                <div class = "square selected" id = {{i}}>{{piece}}</div>
+                            {% else %}
+                                <div class = "square" id = {{i}}>{{piece}}</div>
+                            {% endif %}
+                        {% endif %}
+                        </div>
+                    {% else %}
+                        {% if valid_squares and i in valid_squares %}
+                          <div class = "tile can_move_to" id = {{i}}></div>
+                        {% else %}
+                            {% if selected and i == selected %}
+                              <div class = "tile selected" id = {{i}}></div>
+                            {% else %}
+                              <div class = "tile" id = {{i}}></div>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        </div>
+        <script type="text/javascript" src="{{url_for('static', filename='scripts/listener.js')  }}"></script>
     </div>
   </body>
 </html>
