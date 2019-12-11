@@ -6,20 +6,20 @@ app = Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 b = Board.Board()
 b.initialize()
-valid_moves = None
+valid_squares = None
 
 @app.route('/')
 def index():
-
 	# board_state = b.board_state()
 	board_state = b.board_state_for_html()
-	return render_template('index.html', board=board_state, valid_squares=valid_moves)
+	return render_template('index.html', board=board_state, valid_squares=valid_squares)
 
 @app.route('/get_valid_moves/<int:pos>')
 def valid_moves(pos):
+	global valid_squares
 	valid_squares = b.valid_moves_from_html(pos)
 	board_state = b.board_state_for_html()
-	return render_template("index.html", board=board_state, valid_squares=valid_squares)
-
+	return index()
+	
 if __name__ == "__main__":
  	app.run()
