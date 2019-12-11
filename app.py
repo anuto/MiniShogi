@@ -4,17 +4,21 @@ from static.scripts import Board
 
 app = Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
+b = Board.Board()
+b.initialize()
+valid_moves = None
+
 @app.route('/')
 def index():
-	b = Board.Board()
-	b.initialize()
+
 	# board_state = b.board_state()
 	board_state = b.board_state_for_html()
-	return render_template('index.html', board=board_state)
+	return render_template('index.html', board=board_state, valid_squares=valid_moves)
 
-@app.route('/get_valid_moves/<pos>')
+@app.route('/get_valid_moves/<int:pos>')
 def valid_moves(pos):
 	valid_squares = b.valid_moves_from_html(pos)
+	board_state = b.board_state_for_html()
 	return render_template("index.html", board=board_state, valid_squares=valid_squares)
 
 if __name__ == "__main__":

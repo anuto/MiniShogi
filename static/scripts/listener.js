@@ -21,5 +21,10 @@ elems.forEach(function(elem) {
 
         console.log("row: " + num_row)
         console.log("col: " + num_col)
+
+        var og = window.location.href
+        window.location.href += "get_valid_moves/" + id
+        // window.location.href = og
+
     });
 });

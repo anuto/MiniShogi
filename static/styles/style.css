@@ -15,6 +15,10 @@
 	background: #e3e1e1;
 }
 
+.square .can_move_to {
+	background: yellow;
+}
+
 
 body {
 	background-color: white;

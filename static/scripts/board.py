@@ -139,9 +139,11 @@ class Board:
 		return mod_board
 
 	def valid_moves_from_html(self, pos):
-		num_row = pos / 10
-		num_col = pos % 10
-		valid_moves self.get_valid_moves(num_row, num_col)
+		num_row = pos / 5
+		num_col = pos % 5
+		print "row: " + str(num_row) 
+		print "col: " + str(num_col)
+		valid_moves = self.get_valid_moves(num_row, num_col)
 		valid_squares = []
 		for (x, y) in valid_moves:
 			valid_squares.append(y * 5 + x)
