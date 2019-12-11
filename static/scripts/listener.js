@@ -1,10 +1,8 @@
-var squares = document.getElementsByClassName("square")
 var elems = []
 
-for(var i = 0; i < squares.length; i++) {
-   elems.push((squares.item(i)));
+for(var i = 0; i < 25; i++) {
+   elems.push(document.getElementById(i));
 }
-
 var selected = null
 
 elems.forEach(function(elem) {
