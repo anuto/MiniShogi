@@ -6,6 +6,7 @@ for(var i = 0; i < squares.length; i++) {
 }
 
 var selected = null
+
 elems.forEach(function(elem) {
     elem.addEventListener("click", function() {
         //this function does stuff
@@ -14,7 +15,6 @@ elems.forEach(function(elem) {
         console.log("inner html: " + elem.innerHTML.trim())
         console.log("selected: " + selected)
         var id = elem.id
-
         console.log("id: " + id)
         var num_row = parseInt(id / 5)
         var num_col = id % 5

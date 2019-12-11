@@ -13,6 +13,6 @@ class Emperor(Piece):
 		moves = []
 		for i in range(2):
 			for j in range(2):
-				if self.check(2 * i - 1, 2 * j - 1, board):
-					moves += [(2 * i - 1, 2 * j - 1)]
+				if self.check(x + 2 * i - 1, y + 2 * j - 1, board):
+					moves += [(x + 2 * i - 1, y + 2 * j - 1)]
 		return moves

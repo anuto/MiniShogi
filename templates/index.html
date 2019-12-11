@@ -23,7 +23,11 @@
               {% if valid_squares and i in valid_squares %}
                 <div class="square can_move_to" id={{i}}>
               {% else %}
-                <div class="square" id={{i}}>
+                {% if selected and i == selected %}
+                  <div class="square selected" id={{i}}>
+                {% else %}
+                  <div class="square" id={{i}}>
+                {% endif %} 
               {% endif %}
                 {% if piece %}
                   {{piece}}

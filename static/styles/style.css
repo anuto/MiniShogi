@@ -16,7 +16,11 @@
 }
 
 .square.can_move_to {
-	background: red;
+	background: orange;
+}
+
+.square.selected {
+	background: yellow;
 }
 
 
