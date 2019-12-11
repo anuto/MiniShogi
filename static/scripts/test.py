@@ -1,4 +1,4 @@
-from board import Board
+from Board import Board
 
 def main():
 	b = test_initialize()
