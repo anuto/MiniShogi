@@ -7,19 +7,20 @@ app.config['TEMPLATES_AUTO_RELOAD'] = True
 b = Board.Board()
 b.initialize()
 valid_squares = None
+board_state = b.board_state_for_html()
 
 @app.route('/')
 def index():
 	# board_state = b.board_state()
-	board_state = b.board_state_for_html()
 	return render_template('index.html', board=board_state, valid_squares=valid_squares)
 
 @app.route('/get_valid_moves/<int:pos>')
 def valid_moves(pos):
+	import pdb
+	pdb.set_trace()
 	global valid_squares
 	valid_squares = b.valid_moves_from_html(pos)
-	board_state = b.board_state_for_html()
-	return index()
-	
+	return redirect("/")
+
 if __name__ == "__main__":
  	app.run()
