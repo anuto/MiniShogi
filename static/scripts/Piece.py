@@ -20,12 +20,20 @@ class Piece(object):
 		else:
 			return False
 
-	def is_blocked(self, board, x, y):
+	def on_same_team(self, x, y, board):
+		if not self.is_empty(x, y, board):
+			other = board[y][x]
+			other_team = other.team
+			return other.team == self.team
+		else:
+			return False
+
+	def is_empty(self, x, y, board):
 		if x >= 0 and y < 5 and y >= 0 and y < 5:
 			current = board[y][x]
 			return current == None
 		else:
-			return True
+			return False
 
 	def y_dir(piece):
 		if piece.team == 1:
