@@ -1,6 +1,7 @@
 from flask import Flask, Blueprint, render_template, request, redirect, url_for
 from static.scripts import main
 from static.scripts import Board 
+from datetime import datetime
 
 app = Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
@@ -13,11 +14,12 @@ selected = None
 @app.route('/')
 def index():
 	# board_state = b.board_state()
+	print ("index: " + str(datetime.now()))
 	return render_template('index.html', board=board_state, valid_squares=valid_squares, selected=selected)
 
 @app.route('/get_valid_moves/<int:pos>')
 def valid_moves(pos):
-
+	print("vm1: " + str(datetime.now()))
 	if not selected or (valid_squares and pos not in valid_squares):
 		global valid_squares
 		valid_squares = b.valid_moves_from_html(pos)
@@ -33,8 +35,9 @@ def valid_moves(pos):
 		board_state = b.board_state_for_html()
 		global selected
 		selected = None
-	
+	print ("vm2: " + str(datetime.now()))
 	return redirect("/")
 
 if __name__ == "__main__":
- 	app.run()
+	app.run(threaded=True)
+
