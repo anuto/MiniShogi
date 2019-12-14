@@ -7,12 +7,11 @@ class Emperor(Piece):
 		Piece.__init__(self, team)
 
 	def get_moves(self, x, y, board):
-		return []
-
-	def get_moves(self, x, y, board):
 		moves = []
-		for i in range(2):
-			for j in range(2):
-				if self.check(x + 2 * i - 1, y + 2 * j - 1, board):
-					moves += [(x + 2 * i - 1, y + 2 * j - 1)]
+
+		for x_coord in range(-1, 2):
+			for y_coord in range(-1, 2):
+				if self.check(x_coord + x, y_coord + y, board):
+					moves += [(x_coord + x, y_coord + y)]
+		print "emp moves: " + str(moves)
 		return moves

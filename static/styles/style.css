@@ -54,6 +54,10 @@
 	background: #b5750a;
 }
 
+.square.can_move_to {
+	
+}
+
 .tile.can_move_to {
 	height: 85px;
 	width: 75px;

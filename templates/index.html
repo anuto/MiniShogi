@@ -21,10 +21,11 @@
                 <div class = "row">
                 {% for (piece, i) in row %}
                     {% if piece %}
-                        <div class="tile">
                         {% if valid_squares and i in valid_squares %}
-                            <div class = "square can_move_to" id = {{i}}>{{piece}}></div>
+                            <div class="tile can_move_to">
+                            <div class = "square can_move_to" id = {{i}}>{{piece}}</div>
                         {% else %}
+                            <div class="tile">
                             {% if selected and i == selected %}
                                 <div class = "square selected" id = {{i}}>{{piece}}</div>
                             {% else %}

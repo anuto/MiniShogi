@@ -19,6 +19,7 @@ def index():
 
 @app.route('/get_valid_moves/<int:pos>')
 def valid_moves(pos):
+
 	print("vm1: " + str(datetime.now()))
 	if not selected or (valid_squares and pos not in valid_squares):
 		global valid_squares
