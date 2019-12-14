@@ -27,7 +27,14 @@ def index():
 def valid_moves(pos):
 
 	print("vm1: " + str(datetime.now()))
-	if not selected or (valid_squares and pos not in valid_squares):
+	print("selected: " + str(selected))
+	print("pos: " + str(pos))
+	if selected == pos:
+		global selected
+		selected = None
+		global valid_squares
+		valid_squares = None
+	elif not selected or (valid_squares and pos not in valid_squares):
 		global valid_squares
 		valid_squares = b.valid_moves_from_html(pos)
 		global selected
