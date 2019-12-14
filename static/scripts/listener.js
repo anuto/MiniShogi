@@ -1,7 +1,10 @@
 var elems = []
 
 for(var i = 0; i < 25; i++) {
-   elems.push(document.getElementById(i));
+	elem = document.getElementById(i)
+	if(elem.className.includes("square")) {
+	   elems.push(elem);
+	}
 }
 var selected = null
 
