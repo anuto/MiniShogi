@@ -1,14 +1,16 @@
-var elems = []
-
+var pieces = []
+var empty_spaces = []
 for(var i = 0; i < 25; i++) {
 	elem = document.getElementById(i)
 	if(elem.className.includes("square")) {
-	   elems.push(elem);
+	   pieces.push(elem);
+	} else {
+		empty_spaces.push(elem)
 	}
 }
 var selected = null
 
-elems.forEach(function(elem) {
+pieces.forEach(function(elem) {
     elem.addEventListener("click", function() {
         //this function does stuff
         console.log("elem: " + elem)
@@ -27,4 +29,11 @@ elems.forEach(function(elem) {
         window.location.href += "get_valid_moves/" + id
         selected = id
     });
+});
+
+empty_spaces.forEach(function(elem) {
+	elem.addEventListener("click", function() {
+		var id = elem.id
+		window.location.href += "move_selected_to/" + id
+	});
 });
