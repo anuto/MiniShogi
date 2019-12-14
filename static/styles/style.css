@@ -67,6 +67,16 @@
 	border-width: 5px;
 }
 
+.dead_box {
+	background:lightgrey;
+	height: 80px;
+	width: 600px;
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 10px;
+	padding: 15px;
+}
+
 .square.selected {
 
 	background: #b5750a;

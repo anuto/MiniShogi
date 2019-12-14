@@ -15,15 +15,20 @@
 
   <body>
     Hello
+    <div class="dead_box" id="team_1_placeable">
+      {% for piece in team_1_placeable %}
+        <div class = "square">{{piece}}</div>
+      {% endfor %}
+    </div>
     <div class="board">
-        <div class="row">
-            {% for row in board %}
-                <div class = "row">
+        {% for row in board %}
+            <div class = "row">
                 {% for (piece, i) in row %}
                     {% if piece %}
                         {% if valid_squares and i in valid_squares %}
                             <div class="tile can_move_to">
                             <div class = "square can_move_to" id = {{i}}>{{piece}}</div>
+                            </div>
                         {% else %}
                             <div class="tile">
                             {% if selected and i == selected %}
@@ -31,8 +36,8 @@
                             {% else %}
                                 <div class = "square" id = {{i}}>{{piece}}</div>
                             {% endif %}
+                            </div>
                         {% endif %}
-                        </div>
                     {% else %}
                         {% if valid_squares and i in valid_squares %}
                           <div class = "tile can_move_to" id = {{i}}></div>
@@ -45,9 +50,15 @@
                         {% endif %}
                     {% endif %}
                 {% endfor %}
-            {% endfor %}
-        </div>
-        <script type="text/javascript" src="{{url_for('static', filename='scripts/listener.js')  }}"></script>
+            </div>
+        {% endfor %}
+    </div>
+     <div class="dead_box" id="team_2_placeable">
+       {% for piece in team_2_placeable %}
+          <div class = "square">{{piece}}</div>
+      {% endfor %}
+     </div>
+     <script type="text/javascript" src="{{url_for('static', filename='scripts/listener.js')  }}"></script>
     </div>
   </body>
 </html>

@@ -144,7 +144,8 @@ class Board:
 				i += 1
 			mod_board.append(mod_row)
 		print mod_board
-		return mod_board
+
+		return mod_board, self.dead_pieces[1], self.dead_pieces[2]
 
 	def valid_moves_from_html(self, pos):
 		num_row = pos / 5

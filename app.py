@@ -8,14 +8,20 @@ app.config['TEMPLATES_AUTO_RELOAD'] = True
 b = Board.Board()
 b.initialize()
 valid_squares = None
-board_state = b.board_state_for_html()
+board_state, team_1_placeable, team_2_placeable = b.board_state_for_html()
 selected = None
 
 @app.route('/')
 def index():
 	# board_state = b.board_state()
 	print ("index: " + str(datetime.now()))
-	return render_template('index.html', board=board_state, valid_squares=valid_squares, selected=selected)
+	return render_template('index.html', 
+		board=board_state, 
+		valid_squares=valid_squares, 
+		selected=selected, 
+		team_1_placeable=team_1_placeable, 
+		team_2_placeable=team_2_placeable
+	)
 
 @app.route('/get_valid_moves/<int:pos>')
 def valid_moves(pos):
@@ -33,7 +39,9 @@ def valid_moves(pos):
 		global valid_squares
 		valid_squares = None
 		global board_state
-		board_state = b.board_state_for_html()
+		global team_1_placeable
+		global team_2_placeable
+		board_state, team_1_placeable, team_2_placeable = b.board_state_for_html()
 		global selected
 		selected = None
 	print ("vm2: " + str(datetime.now()))
