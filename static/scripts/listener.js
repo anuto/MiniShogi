@@ -22,7 +22,6 @@ elems.forEach(function(elem) {
 
         var og = window.location.href
         window.location.href += "get_valid_moves/" + id
-        window.location.href = og
         selected = id
     });
 });
