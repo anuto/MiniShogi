@@ -72,7 +72,7 @@ def place_piece(given_id):
 	team = info[0][1]
 	index = info[2]
 	global dead_selected
-	if dead_selected and dead_selected == given_id:
+	if dead_selected != None and dead_selected == given_id:
 		dead_selected = None
 		global valid_squares
 		valid_squares = None
