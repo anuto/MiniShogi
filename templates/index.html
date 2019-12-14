@@ -21,6 +21,7 @@
       <p><a href="/how_to_play">how to play</a></p>
     </div>
     <div class = "main">
+        <div class = "message">player {{turn}}'s turn</div>
         <div class="dead_box" id="team_1_placeable">
           {% for (piece, i) in team_1_placeable %}
             {% if dead_selected == "t1_dead_" + i|string %}

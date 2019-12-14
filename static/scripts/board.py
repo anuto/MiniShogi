@@ -115,7 +115,7 @@ class Board:
 		x1 = pos1 % 5
 		y2 = pos2 / 5
 		x2 = pos2 % 5
-		change_turn()
+		self.change_turn()
 		self.move(x1, y1, x2, y2)
 
 	def check_promotion(self, curr, y):
@@ -130,7 +130,7 @@ class Board:
 		team = int(info[0][1])
 		index = int(info[2])
 		dead_piece = self.dead_pieces[team][index]
-		change_turn()
+		self.change_turn()
 		self.board[y][x] = dead_piece
 		print("dead index: " + str(index))
 		self.dead_pieces[team].pop(index)

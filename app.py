@@ -11,16 +11,21 @@ valid_squares = None
 board_state, team_1_placeable, team_2_placeable = b.board_state_for_html()
 selected = None
 dead_selected = None
+turn = b.get_player_turn()
 
 @app.route('/')
 def index():
+	global turn
+	turn = b.get_player_turn()
+
 	return render_template('index.html', 
 		board=board_state, 
 		valid_squares=valid_squares, 
 		selected=selected, 
 		team_1_placeable=team_1_placeable, 
 		team_2_placeable=team_2_placeable,
-		dead_selected=dead_selected
+		dead_selected=dead_selected,
+		turn=turn,
 	)
 
 @app.route('/get_valid_moves/<int:pos>')
@@ -64,6 +69,7 @@ def move_selected_to(pos):
 			board_state, team_1_placeable, team_2_placeable = b.board_state_for_html()
 			global dead_selected
 			dead_selected = None
+
 	return redirect("/")
 
 @app.route('/place_piece/<string:given_id>')
