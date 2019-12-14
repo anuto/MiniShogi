@@ -53,6 +53,7 @@ class Board:
 		self.dead_pieces[1] = []
 		self.dead_pieces[2] = []
 		self.winner = None
+		self.player_turn = 1
 
 	def print_board(self):
 		print("off board: " + str(self.dead_pieces[1]))
@@ -84,6 +85,12 @@ class Board:
 
 	def is_player_turn(self, inquiry):
 		return inquiry == self.player_turn
+
+	def is_valid_piece(self, pos):
+		y = pos / 5
+		x = pos % 5
+		piece = self.board[y][x]
+		return piece.team == self.player_turn
 
 	def change_turn(self):
 		if self.player_turn == 1:

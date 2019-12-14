@@ -32,17 +32,17 @@ def index():
 def valid_moves(pos):
 
 	print("vm1: " + str(datetime.now()))
-
-	if selected == pos:
-		global selected
-		selected = None
-		global valid_squares
-		valid_squares = None
-	else:
-		global valid_squares
-		valid_squares = b.valid_moves_from_html(pos)
-		global selected
-		selected = pos
+	if b.is_valid_piece(pos):
+		if selected == pos:
+			global selected
+			selected = None
+			global valid_squares
+			valid_squares = None
+		else:
+			global valid_squares
+			valid_squares = b.valid_moves_from_html(pos)
+			global selected
+			selected = pos
 	print ("vm2: " + str(datetime.now()))
 	return redirect("/")
 
