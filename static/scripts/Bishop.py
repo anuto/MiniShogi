@@ -18,60 +18,53 @@ class Bishop(Piece):
 	def get_moves(self, x, y, board):
 		moves = []
 		
-		seen_enemy = False
-		for index in range(5):
-			i = index + 1
+		for i in range(1, 6):
 			x_coord = x - i
 			y_coord = y - i
+
 			if self.is_valid_square(x_coord, y_coord):
 				is_blocked = self.get_info(x_coord, y_coord, board, moves)
-				if is_blocked == None or (seen_enemy and is_blocked):
+				if is_blocked == None:
 					break
 				else:
 					moves += [(x_coord, y_coord)]
 					if is_blocked:
-						seen_enemy = True
+						break
 
-		seen_enemy = False
-		for index in range(5):
-			i = index + 1
+		for i in range(1, 6):
 			x_coord = x + i
 			y_coord = y + i
 			if self.is_valid_square(x_coord, y_coord):
 				is_blocked = self.get_info(x_coord, y_coord, board, moves)
-				if is_blocked == None or (seen_enemy and is_blocked):
+				if is_blocked == None:
 					break
 				else:
 					moves += [(x_coord, y_coord)]
 					if is_blocked:
-						seen_enemy = True
+						break
 
-		seen_enemy = False
-		for index in range(5):
-			i = index + 1
+		for i in range(1, 6):
 			x_coord = x + i
 			y_coord = y - i
 			if self.is_valid_square(x_coord, y_coord):
 				is_blocked = self.get_info(x_coord, y_coord, board, moves)
-				if is_blocked == None or (seen_enemy and is_blocked):
+				if is_blocked == None:
 					break
 				else:
 					moves += [(x_coord, y_coord)]
 					if is_blocked:
-						seen_enemy = True
+						break
 
-		seen_enemy = False
-		for index in range(5):
-			i = index + 1
+		for i in range(1, 6):
 			x_coord = x - i
 			y_coord = y + i
 			if self.is_valid_square(x_coord, y_coord):
 				is_blocked = self.get_info(x_coord, y_coord, board, moves)
-				if is_blocked == None or (seen_enemy and is_blocked):
+				if is_blocked == None:
 					break
 				else:
 					moves += [(x_coord, y_coord)]
 					if is_blocked:
-						seen_enemy = True
+						break
 
 		return moves
