@@ -10,17 +10,17 @@ b.initialize()
 valid_squares = None
 board_state, team_1_placeable, team_2_placeable = b.board_state_for_html()
 selected = None
+dead_selected = None
 
 @app.route('/')
 def index():
-	# board_state = b.board_state()
-	print ("index: " + str(datetime.now()))
 	return render_template('index.html', 
 		board=board_state, 
 		valid_squares=valid_squares, 
 		selected=selected, 
 		team_1_placeable=team_1_placeable, 
-		team_2_placeable=team_2_placeable
+		team_2_placeable=team_2_placeable,
+		dead_selected=dead_selected
 	)
 
 @app.route('/get_valid_moves/<int:pos>')
@@ -37,26 +37,49 @@ def valid_moves(pos):
 		global valid_squares
 		valid_squares = b.valid_moves_from_html(pos)
 		global selected
-		# TODO: not strictly speaking true. could be an immobilized piece.
-		# but also nonideal - highlighting invalid squares
 		selected = pos
 	print ("vm2: " + str(datetime.now()))
 	return redirect("/")
 
 @app.route('/move_selected_to/<int:pos>')
 def move_selected_to(pos):
-	import pdb
-	pdb.set_trace()
 	if valid_squares and pos in valid_squares:
-		b.move_from_html(selected, pos)
+		if selected != None: # needs to be this, 0 evaluates to False apparently
+			b.move_from_html(selected, pos)
+			global valid_squares
+			valid_squares = None
+			global board_state
+			global team_1_placeable
+			global team_2_placeable
+			board_state, team_1_placeable, team_2_placeable = b.board_state_for_html()
+			global selected
+			selected = None
+		elif dead_selected != None: # place
+			b.place_from_html(dead_selected, pos)
+			global valid_squares
+			valid_squares = None
+			global board_state
+			global team_1_placeable
+			global team_2_placeable
+			board_state, team_1_placeable, team_2_placeable = b.board_state_for_html()
+			global dead_selected
+			dead_selected = None
+	return redirect("/")
+
+@app.route('/place_piece/<string:given_id>')
+def place_piece(given_id):
+	info = given_id.split("_")
+	team = info[0][1]
+	index = info[2]
+	global dead_selected
+	if dead_selected and dead_selected == given_id:
+		dead_selected = None
 		global valid_squares
 		valid_squares = None
-		global board_state
-		global team_1_placeable
-		global team_2_placeable
-		board_state, team_1_placeable, team_2_placeable = b.board_state_for_html()
-		global selected
-		selected = None
+	else:
+		dead_selected = given_id
+		global valid_squares
+		valid_squares = b.empty_squares_for_html()
 	return redirect("/")
 
 if __name__ == "__main__":

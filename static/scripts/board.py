@@ -109,6 +109,18 @@ class Board:
 		team = curr.team
 		return (team == 1 and y == 4) or (team == 2 and y == 0)
 
+	def place_from_html(self, dead_id, pos):
+		y = pos / 5
+		x = pos % 5
+
+		info = dead_id.split("_")
+		team = int(info[0][1])
+		index = int(info[2])
+		dead_piece = self.dead_pieces[team][index]
+		
+		self.board[y][x] = dead_piece
+		print("dead index: " + str(index))
+		self.dead_pieces[team].pop(index)
 
 	def place(self, piece, x, y):
 
@@ -145,7 +157,17 @@ class Board:
 			mod_board.append(mod_row)
 		print mod_board
 
-		return mod_board, self.dead_pieces[1], self.dead_pieces[2]
+		dead_html_1 = []
+		for i in range(len(self.dead_pieces[1])):
+			piece = self.dead_pieces[1][i]
+			dead_html_1 += [(piece, i)]
+
+		dead_html_2 = []
+		for i in range(len(self.dead_pieces[2])):
+			piece = self.dead_pieces[2][i]
+			dead_html_2 += [(piece, i)]
+
+		return mod_board, dead_html_1, dead_html_2
 
 	def valid_moves_from_html(self, pos):
 		num_row = pos / 5
@@ -157,6 +179,13 @@ class Board:
 		for (x, y) in valid_moves:
 			valid_squares.append(y * 5 + x)
 		return valid_squares
+
+	def empty_squares_for_html(self):
+		empty_for_html = []
+		empty_squares = self.get_empty_spaces()
+		for (x, y) in empty_squares:
+			empty_for_html.append(y * 5 + x)
+		return empty_for_html
 
 	def valid_moves(self, team):
 		moves = {}

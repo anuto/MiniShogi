@@ -2,12 +2,13 @@ var pieces = []
 var empty_spaces = []
 for(var i = 0; i < 25; i++) {
 	elem = document.getElementById(i)
-	if(elem.className.includes("square")) {
-	   pieces.push(elem);
-	} else {
-		empty_spaces.push(elem)
-	}
+	if(elem.className.includes("can_move_to")) {
+	   empty_spaces.push(elem)
+	} else if (elem.className.includes("square")) {
+		pieces.push(elem)
+	} 
 }
+
 var selected = null
 
 pieces.forEach(function(elem) {
@@ -37,3 +38,14 @@ empty_spaces.forEach(function(elem) {
 		window.location.href += "move_selected_to/" + id
 	});
 });
+
+var placeable = []
+var all_dead = document.getElementsByClassName("square dead")
+console.log(all_dead)
+for (let elem of all_dead) {
+	console.log(elem)
+	elem.addEventListener("click", function() {
+		var change = "place_piece/" + elem.id
+		window.location.href += change
+	});
+}

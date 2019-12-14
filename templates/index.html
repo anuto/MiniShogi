@@ -16,8 +16,12 @@
   <body>
     Hello
     <div class="dead_box" id="team_1_placeable">
-      {% for piece in team_1_placeable %}
-        <div class = "square">{{piece}}</div>
+      {% for (piece, i) in team_1_placeable %}
+        {% if dead_selected == "t1_dead_" + i|string %}
+            <div class = "square dead selected" id=t1_dead_{{i}}>{{piece}}</div>
+        {% else %}
+            <div class = "square dead" id=t1_dead_{{i}}>{{piece}}</div>
+        {% endif %}
       {% endfor %}
     </div>
     <div class="board">
@@ -31,9 +35,12 @@
                             </div>
                         {% else %}
                             <div class="tile">
-                            {% if selected and i == selected %}
+                            {% if i == selected %}
                                 <div class = "square selected" id = {{i}}>{{piece}}</div>
-                            {% else %}
+                            {% else %}<!-- 
+                                {{selected}}
+                                {{i}}
+                                {{selected == i}} -->
                                 <div class = "square" id = {{i}}>{{piece}}</div>
                             {% endif %}
                             </div>
@@ -42,7 +49,7 @@
                         {% if valid_squares and i in valid_squares %}
                           <div class = "tile can_move_to" id = {{i}}></div>
                         {% else %}
-                            {% if selected and i == selected %}
+                            {% if i == selected %}
                               <div class = "tile selected" id = {{i}}></div>
                             {% else %}
                               <div class = "tile" id = {{i}}></div>
@@ -54,8 +61,12 @@
         {% endfor %}
     </div>
      <div class="dead_box" id="team_2_placeable">
-       {% for piece in team_2_placeable %}
-          <div class = "square">{{piece}}</div>
+       {% for (piece,i) in team_2_placeable %}
+          {% if dead_selected == "t2_dead_" + i|string %}
+            <div class = "square dead selected" id=t2_dead_{{i}}>{{piece}}</div>
+        {% else %}
+            <div class = "square dead" id=t2_dead_{{i}}>{{piece}}</div>
+        {% endif %}
       {% endfor %}
      </div>
      <script type="text/javascript" src="{{url_for('static', filename='scripts/listener.js')  }}"></script>
