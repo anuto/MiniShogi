@@ -82,6 +82,21 @@ def place_piece(given_id):
 		valid_squares = b.empty_squares_for_html()
 	return redirect("/")
 
+@app.route('/reset')
+def reset():
+	b.reset_board()
+	global valid_squares
+	valid_squares = None
+	global board_state
+	global team_1_placeable
+	global team_2_placeable
+	board_state, team_1_placeable, team_2_placeable = b.board_state_for_html()
+	global selected
+	global dead_selected
+	selected = None
+	dead_selected = None
+	return redirect("/")
+
 if __name__ == "__main__":
 	app.run(threaded=True)
 

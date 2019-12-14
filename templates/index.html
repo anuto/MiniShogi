@@ -14,62 +14,69 @@
   </head>
 
   <body>
-    Hello
-    <div class="dead_box" id="team_1_placeable">
-      {% for (piece, i) in team_1_placeable %}
-        {% if dead_selected == "t1_dead_" + i|string %}
-            <div class = "square dead selected" id=t1_dead_{{i}}>{{piece}}</div>
-        {% else %}
-            <div class = "square dead" id=t1_dead_{{i}}>{{piece}}</div>
-        {% endif %}
-      {% endfor %}
+    <div class = "sidebar">
+      <h1>Mini Shogi</h1>
+      
+      <p><a href="/reset">new game</a></p>
+      <p><a href="/how_to_play">how to play</a></p>
     </div>
-    <div class="board">
-        {% for row in board %}
-            <div class = "row">
-                {% for (piece, i) in row %}
-                    {% if piece %}
-                        {% if valid_squares and i in valid_squares %}
-                            <div class="tile can_move_to">
-                            <div class = "square can_move_to" id = {{i}}>{{piece}}</div>
-                            </div>
-                        {% else %}
-                            <div class="tile">
-                            {% if i == selected %}
-                                <div class = "square selected" id = {{i}}>{{piece}}</div>
-                            {% else %}<!-- 
-                                {{selected}}
-                                {{i}}
-                                {{selected == i}} -->
-                                <div class = "square" id = {{i}}>{{piece}}</div>
-                            {% endif %}
-                            </div>
-                        {% endif %}
-                    {% else %}
-                        {% if valid_squares and i in valid_squares %}
-                          <div class = "tile can_move_to" id = {{i}}></div>
-                        {% else %}
-                            {% if i == selected %}
-                              <div class = "tile selected" id = {{i}}></div>
+    <div class = "main">
+        <div class="dead_box" id="team_1_placeable">
+          {% for (piece, i) in team_1_placeable %}
+            {% if dead_selected == "t1_dead_" + i|string %}
+                <div class = "square dead selected" id=t1_dead_{{i}}>{{piece}}</div>
+            {% else %}
+                <div class = "square dead" id=t1_dead_{{i}}>{{piece}}</div>
+            {% endif %}
+          {% endfor %}
+        </div>
+        <div class="board">
+            {% for row in board %}
+                <div class = "row">
+                    {% for (piece, i) in row %}
+                        {% if piece %}
+                            {% if valid_squares and i in valid_squares %}
+                                <div class="tile can_move_to">
+                                <div class = "square can_move_to" id = {{i}}>{{piece}}</div>
+                                </div>
                             {% else %}
-                              <div class = "tile" id = {{i}}></div>
+                                <div class="tile">
+                                {% if i == selected %}
+                                    <div class = "square selected" id = {{i}}>{{piece}}</div>
+                                {% else %}<!-- 
+                                    {{selected}}
+                                    {{i}}
+                                    {{selected == i}} -->
+                                    <div class = "square" id = {{i}}>{{piece}}</div>
+                                {% endif %}
+                                </div>
+                            {% endif %}
+                        {% else %}
+                            {% if valid_squares and i in valid_squares %}
+                              <div class = "tile can_move_to" id = {{i}}></div>
+                            {% else %}
+                                {% if i == selected %}
+                                  <div class = "tile selected" id = {{i}}></div>
+                                {% else %}
+                                  <div class = "tile" id = {{i}}></div>
+                                {% endif %}
                             {% endif %}
                         {% endif %}
-                    {% endif %}
-                {% endfor %}
-            </div>
-        {% endfor %}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+         <div class="dead_box" id="team_2_placeable">
+           {% for (piece,i) in team_2_placeable %}
+              {% if dead_selected == "t2_dead_" + i|string %}
+                <div class = "square dead selected" id=t2_dead_{{i}}>{{piece}}</div>
+            {% else %}
+                <div class = "square dead" id=t2_dead_{{i}}>{{piece}}</div>
+            {% endif %}
+          {% endfor %}
+         </div>
     </div>
-     <div class="dead_box" id="team_2_placeable">
-       {% for (piece,i) in team_2_placeable %}
-          {% if dead_selected == "t2_dead_" + i|string %}
-            <div class = "square dead selected" id=t2_dead_{{i}}>{{piece}}</div>
-        {% else %}
-            <div class = "square dead" id=t2_dead_{{i}}>{{piece}}</div>
-        {% endif %}
-      {% endfor %}
-     </div>
-     <script type="text/javascript" src="{{url_for('static', filename='scripts/listener.js')  }}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='scripts/listener.js')  }}"></script>
     </div>
   </body>
 </html>

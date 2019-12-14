@@ -24,6 +24,7 @@ class Board:
 		self.dead_pieces[1] = []
 		self.dead_pieces[2] = []
 		self.winner = None
+		self.player_turn = 1
 
 	def initialize(self):
 		self.board = [
@@ -78,6 +79,18 @@ class Board:
 				s += "[" + str(j) + "," + str(i) + "]"
 			print(s)
 
+	def get_player_turn(self):
+		return self.player_turn
+
+	def is_player_turn(self, inquiry):
+		return inquiry == self.player_turn
+
+	def change_turn(self):
+		if self.player_turn == 1:
+			self.player_turn = 2
+		else:
+			self.player_turn = 1
+
 	def move(self, x1, y1, x2, y2):
 
 		curr = self.board[y1][x1]
@@ -102,7 +115,7 @@ class Board:
 		x1 = pos1 % 5
 		y2 = pos2 / 5
 		x2 = pos2 % 5
-
+		change_turn()
 		self.move(x1, y1, x2, y2)
 
 	def check_promotion(self, curr, y):
@@ -117,7 +130,7 @@ class Board:
 		team = int(info[0][1])
 		index = int(info[2])
 		dead_piece = self.dead_pieces[team][index]
-		
+		change_turn()
 		self.board[y][x] = dead_piece
 		print("dead index: " + str(index))
 		self.dead_pieces[team].pop(index)
