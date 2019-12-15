@@ -86,6 +86,12 @@ class Board:
 	def is_player_turn(self, inquiry):
 		return inquiry == self.player_turn
 
+	def is_valid_dead_piece(self, string_id):
+		info = string_id.split("_")
+		team = int(info[0][1])
+		index = int(info[2])
+		return self.dead_pieces[team][index].team == self.player_turn
+
 	def is_valid_piece(self, pos):
 		y = pos / 5
 		x = pos % 5
