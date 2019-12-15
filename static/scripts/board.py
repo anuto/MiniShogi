@@ -24,6 +24,7 @@ class Board:
 		self.dead_pieces[1] = []
 		self.dead_pieces[2] = []
 		self.winner = None
+		self.player_turn = 1
 
 	def initialize(self):
 		self.board = [
@@ -52,6 +53,7 @@ class Board:
 		self.dead_pieces[1] = []
 		self.dead_pieces[2] = []
 		self.winner = None
+		self.player_turn = 1
 
 	def print_board(self):
 		print("off board: " + str(self.dead_pieces[1]))
@@ -78,6 +80,30 @@ class Board:
 				s += "[" + str(j) + "," + str(i) + "]"
 			print(s)
 
+	def get_player_turn(self):
+		return self.player_turn
+
+	def is_player_turn(self, inquiry):
+		return inquiry == self.player_turn
+
+	def is_valid_dead_piece(self, string_id):
+		info = string_id.split("_")
+		team = int(info[0][1])
+		index = int(info[2])
+		return self.dead_pieces[team][index].team == self.player_turn
+
+	def is_valid_piece(self, pos):
+		y = pos / 5
+		x = pos % 5
+		piece = self.board[y][x]
+		return piece.team == self.player_turn
+
+	def change_turn(self):
+		if self.player_turn == 1:
+			self.player_turn = 2
+		else:
+			self.player_turn = 1
+
 	def move(self, x1, y1, x2, y2):
 
 		curr = self.board[y1][x1]
@@ -102,13 +128,25 @@ class Board:
 		x1 = pos1 % 5
 		y2 = pos2 / 5
 		x2 = pos2 % 5
-
+		self.change_turn()
 		self.move(x1, y1, x2, y2)
 
 	def check_promotion(self, curr, y):
 		team = curr.team
 		return (team == 1 and y == 4) or (team == 2 and y == 0)
 
+	def place_from_html(self, dead_id, pos):
+		y = pos / 5
+		x = pos % 5
+
+		info = dead_id.split("_")
+		team = int(info[0][1])
+		index = int(info[2])
+		dead_piece = self.dead_pieces[team][index]
+		self.change_turn()
+		self.board[y][x] = dead_piece
+		print("dead index: " + str(index))
+		self.dead_pieces[team].pop(index)
 
 	def place(self, piece, x, y):
 
@@ -144,7 +182,18 @@ class Board:
 				i += 1
 			mod_board.append(mod_row)
 		print mod_board
-		return mod_board
+
+		dead_html_1 = []
+		for i in range(len(self.dead_pieces[1])):
+			piece = self.dead_pieces[1][i]
+			dead_html_1 += [(piece, i)]
+
+		dead_html_2 = []
+		for i in range(len(self.dead_pieces[2])):
+			piece = self.dead_pieces[2][i]
+			dead_html_2 += [(piece, i)]
+
+		return mod_board, dead_html_1, dead_html_2
 
 	def valid_moves_from_html(self, pos):
 		num_row = pos / 5
@@ -156,6 +205,13 @@ class Board:
 		for (x, y) in valid_moves:
 			valid_squares.append(y * 5 + x)
 		return valid_squares
+
+	def empty_squares_for_html(self):
+		empty_for_html = []
+		empty_squares = self.get_empty_spaces()
+		for (x, y) in empty_squares:
+			empty_for_html.append(y * 5 + x)
+		return empty_for_html
 
 	def valid_moves(self, team):
 		moves = {}

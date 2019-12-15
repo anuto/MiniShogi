@@ -20,6 +20,29 @@
 	padding-right: 10px;
 }
 
+h1 {
+	color: grey;
+	font-size: 50px;
+	font-family: "Courier New";
+	margin: 5px;
+}
+
+a {
+	color: grey;
+	margin-left: 30px;
+	font-size: 20px;
+	font-family: "Courier New";
+}
+
+body {
+	padding-left: 20px;
+	display: flex;
+}
+
+.sidebar {
+	margin-right: 70px;
+}
+
 /* the legit one */
 .square {
 	height: 50px;
@@ -58,6 +81,18 @@
 	
 }
 
+.message {
+	height: 50px;
+	margin-bottom: 30px;
+	margin-top:;
+	text-align: center;
+	color: white;
+	font-family: "Courier new";
+	font-size: 30px;
+	background: brown;
+	padding-top: 10px;
+}
+
 .tile.can_move_to {
 	height: 85px;
 	width: 75px;
@@ -67,6 +102,32 @@
 	border-width: 5px;
 }
 
+.dead_box {
+	background:lightgrey;
+	height: 80px;
+	width: 600px;
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 10px;
+	padding-right: 15px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+.square.dead {
+	margin-left: 15px;
+}
+
+.main {
+	display: flex
+/*	justify-content: center;
+*/	flex-grow: 1;
+}
+
+.square.dead.selected {
+	background: #b5750a;
+}
+
 .square.selected {
 
 	background: #b5750a;
@@ -74,6 +135,7 @@
 }
 
 body {
+	padding-top: 20px;
 	background-color: white;
 }
 
