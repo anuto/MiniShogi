@@ -28,7 +28,7 @@ h1 {
 }
 
 a {
-	color: grey;
+	color: brown;
 	margin-left: 30px;
 	font-size: 20px;
 	font-family: "Courier New";
@@ -91,6 +91,7 @@ body {
 	font-size: 30px;
 	background: brown;
 	padding-top: 10px;
+	border-radius: 10px;
 }
 
 .tile.can_move_to {
