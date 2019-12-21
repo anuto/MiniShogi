@@ -4,7 +4,7 @@ class Rook(Piece):
 	def __init__(self, team):
 		self.name = 'Rook'
 		self.team = team		
-		Piece.__init__(self, team, ["King Dragon"])
+		Piece.__init__(self, team, ["DragonKing"])
 
 	def get_moves(self, x, y, board):
 		moves = []

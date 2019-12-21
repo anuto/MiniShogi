@@ -4,7 +4,7 @@ class Bishop(Piece):
 	def __init__(self, team):
 		self.name = 'Bishop'
 		self.team = team
-		Piece.__init__(self, team, ["Horse Dragon"])
+		Piece.__init__(self, team, ["DragonHorse"])
 
 	def get_info(self, x, y, board, moves):	
 		empty = self.is_empty(x, y, board)
