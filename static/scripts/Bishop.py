@@ -67,4 +67,10 @@ class Bishop(Piece):
 					if is_blocked:
 						break
 
+		if self.promoted:
+			for x_coord in range(-1, 2):
+				for y_coord in range(-1, 2):
+					if self.check(x_coord + x, y_coord + y, board):
+						moves += [(x_coord + x, y_coord + y)]
+
 		return moves
