@@ -4,7 +4,7 @@ class Bishop(Piece):
 	def __init__(self, team):
 		self.name = 'Bishop'
 		self.team = team
-		Piece.__init__(self, team, ["Horse Dragon"])
+		Piece.__init__(self, team, ["DragonHorse"])
 
 	def get_info(self, x, y, board, moves):	
 		empty = self.is_empty(x, y, board)
@@ -66,5 +66,11 @@ class Bishop(Piece):
 					moves += [(x_coord, y_coord)]
 					if is_blocked:
 						break
+
+		if self.promoted:
+			for x_coord in range(-1, 2):
+				for y_coord in range(-1, 2):
+					if self.check(x_coord + x, y_coord + y, board):
+						moves += [(x_coord + x, y_coord + y)]
 
 		return moves

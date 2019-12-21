@@ -21,6 +21,29 @@
       <p><a href="/how_to_play">how to play</a></p>
     </div>
     <div class = "main">
+        {% if winner %}
+          <div class="greyout">
+            <span class="helper"></span>
+            <div class="popup">
+              <p>Game over. Player {{winner}} wins!</p>
+              <button class="popup-button" id="play_again">play again</button>
+            </div>
+          </div>
+        {% else %}
+          {% if promotions %}
+              <div class = "greyout">
+                <span class="helper"></span>
+                <div class="popup">
+                  <p>Promote to what piece?</p>
+                  <div class="option-holder" id="promotion-options">
+                    {% for promotion in promotions %}
+                      <div class="square" id=promote_{{promotion}}>{{promotion}}</div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+          {% endif %}
+        {% endif %}
         <div class = "message">player {{turn}}'s turn</div>
         <div class="dead_box" id="team_1_placeable">
           {% for (piece, i) in team_1_placeable %}

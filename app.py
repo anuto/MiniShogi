@@ -12,6 +12,8 @@ board_state, team_1_placeable, team_2_placeable = b.board_state_for_html()
 selected = None
 dead_selected = None
 turn = b.get_player_turn()
+promotions = None
+to_promote = None
 
 @app.route('/')
 def index():
@@ -21,7 +23,6 @@ def index():
 	winner = None
 	if game_over:
 		winner = b.get_winner()
-
 	return render_template('index.html', 
 		board=board_state, 
 		valid_squares=valid_squares, 
@@ -30,7 +31,19 @@ def index():
 		team_2_placeable=team_2_placeable,
 		dead_selected=dead_selected,
 		turn=turn,
+		promotions=promotions,
+		winner=winner,
 	)
+
+@app.route('/promote_to/<string:given_id>')
+def promote(given_id):
+	option = given_id.split("_")[1]
+	b.promote(to_promote, option)
+	global to_promote
+	to_promote = None
+	global promotions
+	promotions = None
+	return redirect("/")
 
 @app.route('/get_valid_moves/<int:pos>')
 def valid_moves(pos):
@@ -54,7 +67,9 @@ def valid_moves(pos):
 def move_selected_to(pos):
 	if valid_squares and pos in valid_squares:
 		if selected != None: # needs to be this, 0 evaluates to False apparently
-			promotions = b.move_from_html(selected, pos)
+			global promotions
+			global to_promote
+			to_promote, promotions = b.move_from_html(selected, pos)
 			global valid_squares
 			valid_squares = None
 			global board_state
@@ -106,6 +121,10 @@ def reset():
 	global dead_selected
 	selected = None
 	dead_selected = None
+	global to_promote
+	global promotions
+	to_promote = None
+	promotions = None
 	return redirect("/")
 
 if __name__ == "__main__":

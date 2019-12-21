@@ -49,3 +49,20 @@ for (let elem of all_dead) {
 		window.location.href += change
 	});
 }
+
+var play_again = document.getElementById("play_again")
+if (play_again != null) {
+	play_again.addEventListener("click", function() {
+		window.location.href += "reset"
+	});
+}
+
+var promotion_options_holder = document.getElementById("promotion-options")
+if (promotion_options_holder != null) {
+	var promotion_options = promotion_options_holder.getElementsByTagName("div")
+	for (let elem of promotion_options) {
+		elem.addEventListener("click", function() {
+			window.location.href += "promote_to/" + elem.id
+		});
+	}
+}

@@ -6,6 +6,7 @@ from Rook import Rook
 from Pawn import Pawn
 
 import copy
+import random
 
 DEVELOPING = False
 
@@ -129,7 +130,8 @@ class Board:
 		y2 = pos2 / 5
 		x2 = pos2 % 5
 		self.change_turn()
-		self.move(x1, y1, x2, y2)
+		ops = self.move(x1, y1, x2, y2)
+		return self.board[y2][x2], ops
 
 	def check_promotion(self, curr, y):
 		team = curr.team
@@ -147,6 +149,10 @@ class Board:
 		self.board[y][x] = dead_piece
 		print("dead index: " + str(index))
 		self.dead_pieces[team].pop(index)
+
+	def get_move(self, player):
+		valid_moves = self.valid_moves(team)
+		return random.choice(valid_moves)
 
 	def place(self, piece, x, y):
 
