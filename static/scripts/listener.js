@@ -49,7 +49,7 @@ for (let elem of all_dead) {
 		window.location.href += change
 	});
 }
-debugger;
+
 var play_again = document.getElementById("play_again")
 if (play_again != null) {
 	play_again.addEventListener("click", function() {
