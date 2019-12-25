@@ -14,15 +14,25 @@ dead_selected = None
 turn = b.get_player_turn()
 promotions = None
 to_promote = None
+my_player_num = 2
 
 @app.route('/')
 def index():
 	global turn
 	turn = b.get_player_turn()
+	if turn != my_player_num:
+		b.get_move(turn)
+		global board_state
+		global team_1_placeable
+		global team_2_placeable
+		board_state, team_1_placeable, team_2_placeable = b.board_state_for_html()
+		turn = b.get_player_turn()
+
 	game_over = b.game_over()
 	winner = None
 	if game_over:
 		winner = b.get_winner()
+
 	return render_template('index.html', 
 		board=board_state, 
 		valid_squares=valid_squares, 
