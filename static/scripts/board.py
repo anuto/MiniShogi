@@ -150,9 +150,29 @@ class Board:
 		print("dead index: " + str(index))
 		self.dead_pieces[team].pop(index)
 
+	def get_computer_move(self, valid_moves):
+		picked_piece = random.choice(valid_moves.keys())
+		picked_move = random.choice(valid_moves[picked_piece])
+		return picked_piece, picked_move
+
 	def get_move(self, player):
-		valid_moves = self.valid_moves(team)
-		return random.choice(valid_moves)
+		valid_moves = self.valid_moves(player)
+		print "vm: " + str(valid_moves)
+		picked_piece, picked_move = self.get_computer_move(valid_moves)
+		self.change_turn()
+
+		x2 = picked_move[0]
+		y2 = picked_move[1]
+
+		if '(dead)' != picked_piece[0]:
+			x1 = picked_piece[0][0]
+			y1 = picked_piece[0][1]
+
+			ops = self.move(x1, y1, x2, y2)
+			if ops:
+				self.promote(picked_piece[1], random.choice(ops))
+		else:
+			self.place(picked_piece, x2, y2)
 
 	def place(self, piece, x, y):
 

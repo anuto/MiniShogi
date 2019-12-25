@@ -10,6 +10,7 @@
 
     <!-- Custom styles for this template -->
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
+<link href='https://fonts.googleapis.com/css?family=Allan' rel='stylesheet'>
 
   </head>
 
@@ -17,8 +18,8 @@
     <div class = "sidebar">
       <h1>Mini Shogi</h1>
       
-      <p><a href="/reset">new game</a></p>
-      <p><a href="/how_to_play">how to play</a></p>
+      <p><a href="/reset">+ new game</a></p>
+      <p><a href="/how_to_play">+ how to play</a></p>
     </div>
     <div class = "main">
         {% if winner %}
